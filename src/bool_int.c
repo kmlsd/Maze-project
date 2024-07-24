@@ -1,4 +1,4 @@
-#include "/header/main.h"
+#include "../header/main.h"
 /**
 * bool_init - function initialized SDL
 * Return: int value of bool(true / false)
@@ -6,6 +6,7 @@
 int bool_init(void)
 {
 	/*_Bool success = 1;Initialize SDL*/
+	int success = 1;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
@@ -27,6 +28,7 @@ int bool_init(void)
 			renderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
 			SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 			SDL_RenderSetLogicalSize(renderer, SCRN_WIDTH, SCRN_HEIGHT);
+			SDL_RenderClear(renderer);	
 
 			if (renderer == NULL)
 			{

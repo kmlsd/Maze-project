@@ -1,4 +1,5 @@
 #include "../header/main.h"
+#include <SDL2/SDL.h>
 
 /**
  * main - Entry point
@@ -16,7 +17,7 @@ int main(void)
 	}
 	else
 	{
-		creat_map(*worldMap)[MAP_WIDTH]);
+		creat_map(worldMap);
 		while (game_loop())
 		{
 			rend_sky_floor();

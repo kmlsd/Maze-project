@@ -8,38 +8,42 @@ void renderWalls(void)
 	int x;
 	for (x = 0; x < SCRN_WIDTH; x++)
 	{
-		double screenCoordinate = (2 * x) / (double)SCREEN_WIDTH - 1;
+		double screenCoordinate = (2 * x) / (double)SCRN_WIDTH - 1;
 		double rayPosX = posX;
 		double rayPosY = posY;
 		double rayDirX = dirX + planeX * screenCoordinate;
 		double rayDirY = dirY + planeY * screenCoordinate;
-
-		/*get X, Y coordinate of map by truncating current position*/
 		int mapX = (int) rayPosX;
 		int mapY = (int) rayPosY;
 		/* Calculate distance to next x and y grid lines */
 		double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
 		double deltaDistY = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirY);
 		/* Calculate initial step and side distances */
-		double sideDistX, sideDistY, WallDist;
-		int stepX, stepY, wall_height, wall_top, wall_bottom;
-		/*Direction to step (+1 or -1)*/
-		int stepX;
-		int stepY;
-		/*north south, or east west?*/
-		int nswall = 0;
-		int wallhit = 0;
-		/*calculate sidedist from x & y  */
-		calc_sidedist(rayDirX, rayDirY, &sideDistX,
-			&sideDistY, &stepX, &stepY, mapX, mapY, deltaDistX, deltaDistY)
-		/* World map */
-		creat_map(worldMap);
-		int worldMap[MAP_WIDTH][MAP_HEIGHT];
+		double sideDistX = 0, sideDistY = 0;
+		int stepX = 0, stepY = 0;
+		int nswall = 0, wallhit = 0;
+		if (rayDirX < 0)
+		{
+		stepX = -1;
+		sideDistX = (posX - mapX) * deltaDistX;
+		}
+		else
+		{
+		stepX = 1;
+		sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+		}
+		if (rayDirY < 0)
+                {
+		stepY = -1;
+		sideDistY = (posY - mapY) * deltaDistY;
+		}
+		else
+		{
+		stepY = 1;
+		sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+		}
 		ray_dda(&wallhit, &nswall, &sideDistX, &sideDistY, deltaDistX,
-							deltaDistY, &mapX, &mapY, stepX, stepY, worldMap);
-		wall_rend(nswall, sideDistX, sideDistY, deltaDistX, deltaDistY,
-						&WallDist, &wall_height, &wall_top, &wall_bottom);
+							deltaDistY, &mapX, &mapY, &stepX, &stepY, worldMap);
+		wall_rend(x, nswall, sideDistX, sideDistY, deltaDistX, deltaDistY);
 	}
-
-
 }

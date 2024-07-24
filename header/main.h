@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <SDL2/SDL.h>
+
 /*constant variablels*/
 #define SCRN_WIDTH 640
 #define SCRN_HEIGHT 480
@@ -11,6 +12,8 @@
 
 #define MAP_WIDTH 24
 #define MAP_HEIGHT 24
+#define false 0
+#define true 1
 
 /*Player position*/
 extern double posX, posY;
@@ -27,7 +30,7 @@ extern int worldMap[MAP_WIDTH][MAP_HEIGHT];
 
 
 /*bool SDL initialize*/
-int bool_int(void);
+int bool_init(void);
 void close(void);
 /*
 extern int SDL_DestroyRenderer(renderer);
@@ -50,20 +53,24 @@ void rend_sky_floor(void);
 
 /* wall rendering section*/
 void renderWalls();
-void calc_sidedist(rayDirX, rayDirY, &sideDistX,
-			&sideDistY, &stepX, &stepY, mapX, mapY, deltaDistX, deltaDistY);
+/*void calc_sidedist(double rayDirX, double rayDirY, double sideDistX, double sideDistY,
+					 int mapX, int mapY, int stepX, int stepY,
+					 double deltaDistX, double deltaDistY);
+*/
 void ray_dda(int *wallhit, int *nswall, double *sideDistX, double *sideDistY,
-		double deltaDistX, double deltaDistY, int *mapX, int *mapY, int stepX,
-		int stepY, int (*worldMap)[MAP_WIDTH]);
-void wall_rend(int nswall, double sideDistX, double sideDistY,
-						double deltaDistX, double deltaDistY,
-						double *WallDist);
+		double deltaDistX, double deltaDistY, int *mapX, int *mapY, int *stepX,
+		int *stepY, int worldMap[][MAP_HEIGHT]);
+void wall_rend(int x, int nswall, double sideDistX, double sideDistY,
+				double deltaDistX, double deltaDistY);
 
 /*game loop function with while */
 extern int moveLeft, moveRight, moveFwd, moveBck;
 int game_loop(void);
-int mousekey_evnt(SDL_event *event);
-int keydown_evnt(SDL_event *event);
-int keyup_evnt(SDL_event *event);
+int mousekey_evnt(void);
+int keydown_evnt(void);
+int keyup_evnt(void);
 void Player_motion(void);
+/*SDL function*/
+SDL_Window *gWindow = NULL;
+SDL_Renderer  *renderer = NULL;
 #endif /*_MAIN_H_*/

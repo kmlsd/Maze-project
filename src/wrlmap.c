@@ -5,7 +5,7 @@
  *
  * @worldMap: A 2-dimensional matrix of integers to render the game map
  */
-void creat_map(int (*worldMap)[MAP_WIDTH])
+void creat_map(int worldMap[][MAP_HEIGHT])
 {
 	int WorldMap[MAP_WIDTH][MAP_HEIGHT] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},

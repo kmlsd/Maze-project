@@ -8,25 +8,26 @@
  * @sideDistY: Length of ray from current position to next position on y-axis
  * @deltaDistX: Length of ray from one point to another on x-axis
  * @deltaDistY: Length of ray from one point to another on y-axis
- * @WallDist: Perpendicular distance from ray to wall
+ * @x: is x from for loop
  */
-void wall_rend(int nswall, double sideDistX, double sideDistY,
-						double deltaDistX, double deltaDistY,
-						double *WallDist)
+void wall_rend(int x, int nswall, double sideDistX, double sideDistY,
+						double deltaDistX, double deltaDistY)
 {
-	int screen_h = SCREEN_HEIGHT;
+	int screen_h = SCRN_HEIGHT;
+	double WallDist;
+	int wallHeight, drawStart, drawEnd;
 
 	if (nswall == 0)
-		*WallDist = (sideDistX - deltaDistX);
+		WallDist = (sideDistX - deltaDistX);
 	else
-		*WallDist = (sideDistY - deltaDistY);
+		WallDist = (sideDistY - deltaDistY);
 
 	/* Calculate height of line to draw on screen */
-	int wallHeight = (int)(screen_h / *WallDist);
+	wallHeight = (int)(screen_h / WallDist);
 
 	/* calculate lowest and highest pixel to fill in current stripe */
-	int drawStart = -wallHeight / 2 + screen_h / 2;
-	int drawEnd = wallHeight / 2 + screen_h / 2;
+	drawStart = -wallHeight / 2 + screen_h / 2;
+	drawEnd = wallHeight / 2 + screen_h / 2;
 
 	if (drawStart < 0)
 		drawStart = 0;

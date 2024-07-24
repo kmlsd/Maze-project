@@ -5,8 +5,10 @@
  **/
 void rend_sky_floor(void)
 {
+	int x;
 	/* Draw the sky*/
-	SDL_SetRenderDrawColor(instance.renderer, 0, 0, 255, 255);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+	
 	for (x = 0; x <= SCRN_WIDTH; x++)
 	{
 	SDL_RenderDrawLine(renderer, x, 0, x, SCRN_HEIGHT / 2);
