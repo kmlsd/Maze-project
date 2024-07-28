@@ -4,13 +4,13 @@ CC = gcc
 # SRC specifies the .c files
 SRC = src/main.c src/Player_cntrol.c src/Wall_rend1.c src/Wall_rend2.c \
 	src/Wall_rend3.c src/bool_int.c src/game_loop1.c src/game_loop2.c \
-	src/sky_floo.c src/wrlmap.c 
+	src/sky_floo.c src/wrlmap.c
 
 # OBJ specifies the .o files
 OBJ = $(SRC:.c=.o)
 
 # NAME specifies the name of our exectuable
-NAME = 'Maze Project'
+NAME = 'Maz-Project'
 
 # RM specifies the program to delete files
 RM = rm -f
@@ -30,11 +30,12 @@ LDFLAGS = -lm
 # This rule builds our executable
 # Makefile should not compile if the header file main.h is missing
 all: header/main.h $(OBJ)
-	$(CC)  $(OBJ) $(CFLAGS) $(SDL2) $(LDFLAGS)  -o $(NAME)
+	$(CC)  $(OBJ) $(CFLAGS)  $(LDFLAGS) $(SDL2) -o $(NAME)
 
 # This rule deletes all Emacs and Vim temporary files along with the executable
 clean:
 	$(RM) *~
+
 
 # This rule deletes the object files
 oclean:
@@ -44,4 +45,4 @@ oclean:
 fclean: clean oclean
 
 # This rule forces recompilation of all source
-re: fclean all 
+re: fclean all

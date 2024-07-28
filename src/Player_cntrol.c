@@ -5,7 +5,9 @@
  * Player_motion - function change Player base on inPut key 
  * 
  */
-void Player_motion(void)
+void Player_motion(double posX, double posY, double dirX, double dirY,
+	double planeX, double planeY, double moveSpeed, double rotSpeed,
+	int moveLeft, int  moveRight, int moveFwd, int moveBck, int (*worldMap)[MAP_WIDTH])
 {
 	/*timing for input and FPS counter*/
 	double oldTime = 0;

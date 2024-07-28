@@ -6,7 +6,12 @@
  *
  * Return: 0 (Success)
  */
-int main(void)
+int moveLeft,  moveRight,  moveFwd, moveBck;
+double posX, posY, dirX, dirY, planeX, planeY,  moveSpeed,  rotSpeed;
+SDL_Window* gWindow;
+SDL_Renderer* renderer;
+int worldMap[MAP_WIDTH][MAP_HEIGHT];
+int main()
 {
 	
 
@@ -18,7 +23,7 @@ int main(void)
 	else
 	{
 		creat_map(worldMap);
-		while (game_loop())
+		while (game_loop(moveLeft,  moveRight,  moveFwd, moveBck))
 		{
 			rend_sky_floor();
 			renderWalls();
@@ -28,7 +33,8 @@ int main(void)
 			/*Update screen*/
 			SDL_RenderPresent(renderer);
 			/*process movement and rotation speed */
-			Player_motion();
+			Player_motion(posX, posY, dirX, dirY,planeX, planeY,
+	moveSpeed,  rotSpeed, moveLeft,  moveRight,  moveFwd, moveBck, worldMap);
 		}
 	}
 /*Free resources and close SDL*/

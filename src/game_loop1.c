@@ -3,7 +3,7 @@
  * game_loop - function wich can change dir, movement, spd
  * Return: return 1/0 for true/false for success loop
  */
-int game_loop(void)
+int game_loop(int moveLeft, int  moveRight, int  moveFwd, int moveBck)
 {
 	SDL_Event event;
 
@@ -12,9 +12,9 @@ int game_loop(void)
 		switch (event.type)
 		{
 			case SDL_KEYDOWN:
-					keydown_evnt();
+					keydown_evnt(moveLeft,   moveRight,  moveFwd, moveBck);
 			case SDL_KEYUP:
-					keyup_evnt();
+					keyup_evnt(moveLeft,   moveRight,  moveFwd, moveBck);
 			case SDL_MOUSEMOTION:
 					mousekey_evnt();
 			case SDL_QUIT:
@@ -34,11 +34,13 @@ int mousekey_evnt()
 {
 
 SDL_Event event;
-double newRotateSpeed;
-double oldDirX;
-double oldPlaneX;
+double newRotateSpeed = 0;
+double oldDirX = 0;
+double oldPlaneX = 0;
 
-if  (event.motion.xrel)
+while (SDL_PollEvent(&event))
+	if (event.type == SDL_MOUSEMOTION)
+	if (event.motion.xrel)
 	{
 	newRotateSpeed = (double)event.motion.xrel * -rotSpeed;
 	oldDirX = dirX;

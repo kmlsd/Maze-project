@@ -5,15 +5,17 @@
 */
 int bool_init(void)
 {
+	SDL_Window *gWindow = NULL;
+	SDL_Renderer  *renderer =  NULL;
 	/*_Bool success = 1;Initialize SDL*/
 	int success = 1;
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
 	{
 		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
 		success = 0;
 	}
 	else
-	{
+	{					
 		/*Create window*/
 		gWindow = SDL_CreateWindow("Maze project ", 0, 0, SCRN_WIDTH, SCRN_HEIGHT,
 				SDL_RENDERER_PRESENTVSYNC | SDL_WINDOW_INPUT_GRABBED | SDL_WINDOW_SHOWN);
