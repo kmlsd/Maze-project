@@ -7,9 +7,11 @@ int bool_init(void)
 {
 	SDL_Window *gWindow = NULL;
 	SDL_Renderer  *renderer =  NULL;
+	int success = 1; 
+
+	setenv("SDL_VIDEO_EGL", "0", 1);
 	/*_Bool success = 1;Initialize SDL*/
-	int success = 1;
-	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
+	if (SDL_Init(SDL_INIT_VIDEO  | SDL_INIT_JOYSTICK) < 0)
 	{
 		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
 		success = 0;
@@ -17,8 +19,7 @@ int bool_init(void)
 	else
 	{					
 		/*Create window*/
-		gWindow = SDL_CreateWindow("Maze project ", 0, 0, SCRN_WIDTH, SCRN_HEIGHT,
-				SDL_RENDERER_PRESENTVSYNC | SDL_WINDOW_INPUT_GRABBED | SDL_WINDOW_SHOWN);
+		gWindow = SDL_CreateWindow("Maze project ", 0, 0, SCRN_WIDTH, SCRN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (gWindow == NULL)
 		{
 			printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
@@ -27,10 +28,10 @@ int bool_init(void)
 		else
 		{
 			/*Create renderer for window*/
-			renderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
-			SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
-			SDL_RenderSetLogicalSize(renderer, SCRN_WIDTH, SCRN_HEIGHT);
-			SDL_RenderClear(renderer);	
+			renderer = SDL_CreateRenderer(gWindow, 0, SDL_RENDERER_ACCELERATED);
+			/*SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");*/
+			/*SDL_RenderSetLogicalSize(renderer, SCRN_WIDTH, SCRN_HEIGHT);*/
+			/*SDL_RenderClear(renderer);*/
 
 			if (renderer == NULL)
 			{

@@ -34,7 +34,7 @@ all: header/main.h $(OBJ)
 
 # This rule deletes all Emacs and Vim temporary files along with the executable
 clean:
-	$(RM) *~
+	$(RM) *~ $(NAME)
 
 
 # This rule deletes the object files

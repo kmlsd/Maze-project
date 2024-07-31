@@ -36,7 +36,7 @@ void close(void);
 /*creat world map*/
 void creat_map(int (*worldMap)[MAP_WIDTH]);
 /*sky & floor render */
-void rend_sky_floor(void);
+void rend_sky_floor();
 
 /* wall rendering section*/
 void renderWalls();
